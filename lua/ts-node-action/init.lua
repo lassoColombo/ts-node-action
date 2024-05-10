@@ -12,10 +12,10 @@ local function replace_node(node, replacement, opts)
   local start_row, start_col, end_row, end_col
   if not opts.target then
     start_row, start_col, end_row, end_col = node:range()
-  elseif type(opts.target) == "TSNode" then
-    start_row, start_col, end_row, end_col = opts.target:range()
-  else
+  elseif type(opts.target) == "table" then
     start_row, start_col, end_row, end_col = table.unpack(opts.target)
+  else
+    start_row, start_col, end_row, end_col = opts.target:range()
   end
 
   vim.api.nvim_buf_set_text(
